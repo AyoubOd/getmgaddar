@@ -1,0 +1,58 @@
+<app-auth-layout>
+  <div class="w-full overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+      <h1 class="text-3xl text-black pb-6">Wrokout plans</h1>
+
+      <a
+        routerLink="/workout-plans/create"
+        class="w-full justify-end flex mb-5"
+      >
+        <button
+          mat-raised-button
+          color="#101726"
+          style="background-color: #101726; color: #fff"
+          class="ms-auto text-white"
+        >
+          <i class="fa-solid fa-plus mr-2"></i>
+          Create Workout plan
+        </button>
+      </a>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Position Column -->
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.date | date : "MM/dd/yyyy" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="exercices">
+            <th mat-header-cell *matHeaderCellDef>Exercices</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.exercices | json }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </div>
+    </main>
+  </div>
+</app-auth-layout>

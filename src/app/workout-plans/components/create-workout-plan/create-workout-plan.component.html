@@ -1,0 +1,117 @@
+<app-auth-layout>
+  <div class="w-full overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+      <h1 class="text-3xl text-black pb-6">Wrokout plans</h1>
+
+      <div class="flex flex-wrap ms-11">
+        <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+          <p class="text-xl pb-6 flex items-center">
+            <i class="fa-solid fa-dumbbell mr-3"></i> Create Your workout plan
+          </p>
+          <div class="leading-loose">
+            <form
+              class="p-10 bg-white rounded shadow-xl flex gap-5 flex-col"
+              [formGroup]="workoutForm"
+              (submit)="onSubmit()"
+            >
+              <mat-form-field class="w-full">
+                <mat-label>Workout name</mat-label>
+                <input type="text" matInput formControlName="name" />
+              </mat-form-field>
+              <div class="flex flex-col">
+                <mat-form-field class="w-full">
+                  <mat-label>Choose a date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    formControlName="date"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <mat-form-field class="w-full mt-3">
+                <mat-label>Added exercices</mat-label>
+                <input type="text" matInput [value]="this.exercices | json" />
+              </mat-form-field>
+
+              <button
+                mat-raised-button
+                class="ms-auto"
+                color="primary"
+                (click)="showExerciceForm = true"
+              >
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add exercice
+              </button>
+
+              <div class="mt-6">
+                <button
+                  class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+                  type="submit"
+                  (click)="onSubmit()"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div *ngIf="showExerciceForm" class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
+          <p class="text-xl pb-6 flex items-center">
+            <i class="fas fa-list mr-3"></i> Create Exercice
+          </p>
+          <div class="leading-loose">
+            <form
+              class="p-10 bg-white rounded shadow-xl"
+              [formGroup]="exerciceForm"
+            >
+              <p class="text-lg text-gray-800 font-medium pb-4">Exercice</p>
+              <div class="mt-2 w-full">
+                <mat-form-field class="w-full">
+                  <mat-label>Name</mat-label>
+                  <input type="text" matInput formControlName="name" />
+                </mat-form-field>
+              </div>
+
+              <div class="mt-2">
+                <mat-form-field class="w-full">
+                  <mat-label>sets</mat-label>
+                  <input type="number" matInput formControlName="sets" />
+                </mat-form-field>
+              </div>
+
+              <div class="mt-2">
+                <mat-form-field class="w-full">
+                  <mat-label>reps</mat-label>
+                  <input type="number" matInput formControlName="reps" />
+                </mat-form-field>
+              </div>
+
+              <div class="mt-2">
+                <mat-form-field class="w-full">
+                  <mat-label>weight</mat-label>
+                  <input type="number" matInput formControlName="weight" />
+                </mat-form-field>
+              </div>
+
+              <div class="mt-6">
+                <button
+                  class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+                  type="submit"
+                  (click)="addExercice()"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</app-auth-layout>

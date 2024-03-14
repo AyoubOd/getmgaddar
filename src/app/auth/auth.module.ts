@@ -9,12 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
-  imports: [
-    FormsModule,
-    AuthRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-  ],
+  imports: [FormsModule, AuthRoutingModule, provideAuth(() => getAuth())],
   exports: [],
 })
 export class AuthModule {}
