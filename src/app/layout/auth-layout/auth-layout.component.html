@@ -5,7 +5,13 @@
       <a
         href="index.html"
         class="text-white text-2xl font-semibold uppercase hover:text-gray-300"
-        >💪 Get-Mgaddar
+      >
+        <img
+          class="mx-auto h-10 w-auto mb-3"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNX97KFTKKrdF5M8z14eUUJzbRNHsvcDdz4NUTTw6oKg&s"
+          alt="Your Company"
+        />
+        Get-Mgaddar
       </a>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
@@ -49,7 +55,9 @@
           (click)="isOpen = !isOpen"
           class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
         >
-          <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400" />
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
+          />
         </button>
         <button
           *ngIf="isOpen"
@@ -63,10 +71,10 @@
           <a href="#" class="block px-4 py-2 account-link hover:text-white"
             >Account</a
           >
-          <a href="#" class="block px-4 py-2 account-link hover:text-white"
-            >Support</a
-          >
-          <a href="#" class="block px-4 py-2 account-link hover:text-white"
+          <a
+            (click)="signOut()"
+            href="#"
+            class="block px-4 py-2 account-link hover:text-white"
             >Sign Out</a
           >
         </div>

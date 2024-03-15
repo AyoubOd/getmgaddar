@@ -22,8 +22,7 @@ export class AuthService {
     return createUserWithEmailAndPassword(this.afAuth, email, password);
   }
 
-  //   isAuthenticated() {
-  //     console.log('from the is Authenticated in the authService');
-  //     return !!this.user$.subscribe(user );
-  //   }
+  signOut() {
+    this.afAuth.signOut();
+  }
 }

@@ -13,10 +13,16 @@ export class WorkoutPlansService {
   getAll() {
     return this.afs
       .collection('WorkoutPlans')
-      .valueChanges() as unknown as Observable<WorkoutPlan[]>;
+      .snapshotChanges() as unknown as Observable<any[]>;
   }
 
   add(workoutPlan: WorkoutPlan) {
+    workoutPlan.id = this.afs.createId();
     this.afs.collection('WorkoutPlans').add(workoutPlan);
+  }
+
+  delete(workoutPlan: WorkoutPlan) {
+    console.log(this.afs.collection('WorkoutPlans').doc(workoutPlan.id));
+    return this.afs.collection('WorkoutPlans').doc(workoutPlan.id).delete();
   }
 }

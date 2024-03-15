@@ -1,0 +1,45 @@
+<app-auth-layout>
+  <div class="w-full overflow-x-hidden border-t flex flex-col">
+    <main class="w-full flex-grow p-6">
+      <h1 class="text-3xl text-black pb-6">Nutrition plans</h1>
+
+      <div class="flex flex-wrap ms-11">
+        <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+          <p class="text-xl pb-6 flex items-center">
+            <i class="fa-solid fa-dumbbell mr-3"></i> Create Your nutrition plan
+          </p>
+          <div class="leading-loose">
+            <form
+              class="p-10 bg-white rounded shadow-xl flex gap-5 flex-col"
+              [formGroup]="nutritionForm"
+              (submit)="onSubmit()"
+            >
+              <mat-form-field class="w-full">
+                <mat-label>Nutrition name</mat-label>
+                <input type="text" matInput formControlName="name" />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Nutrition calories</mat-label>
+                <input type="text" matInput formControlName="calories" />
+              </mat-form-field>
+              <mat-form-field class="w-full">
+                <mat-label>Nutrition protein</mat-label>
+                <input type="text" matInput formControlName="protein" />
+              </mat-form-field>
+
+              <div class="mt-6">
+                <button
+                  class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+                  type="submit"
+                  (click)="onSubmit()"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</app-auth-layout>

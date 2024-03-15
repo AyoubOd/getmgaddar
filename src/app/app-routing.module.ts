@@ -6,13 +6,21 @@ import { AuthModule } from './auth/auth.module';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  // todo : replace with dashboard component (redirect)
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'workout-plans',
     loadChildren: () =>
       import('./workout-plans/workout-plans-routing.module').then(
         (m) => m.WorkoutPlansRoutingModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'nutrition',
+    loadChildren: () =>
+      import('./nutrition/nutrition-routing.module').then(
+        (m) => m.NutritionRoutingModule
       ),
     canActivate: [AuthGuard],
   },

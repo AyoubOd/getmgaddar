@@ -18,6 +18,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { JsonPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { WorkoutPlansService } from '../../workout-plans.service';
+import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-workout-plan',
@@ -35,11 +37,15 @@ import { WorkoutPlansService } from '../../workout-plans.service';
     NgIf,
     MatButtonModule,
     JsonPipe,
+    MatSnackBarModule,
   ],
 })
 export class CreateWorkoutPlanComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private workoutPlansService = inject(WorkoutPlansService);
+  private router: Router = inject(Router);
+  private snakBar = inject(MatSnackBar);
+
   workoutForm = this.fb.group({
     name: ['', Validators.required],
     date: ['', Validators.required],
@@ -75,6 +81,10 @@ export class CreateWorkoutPlanComponent {
         exercices: this.exercices,
       } as WorkoutPlan;
       await this.workoutPlansService.add(data);
+      this.snakBar.open('Workout added succesfully', '', {
+        duration: 1000,
+      });
+      this.router.navigate(['/workout-plans']);
     } catch (e) {
       console.log(e);
     }

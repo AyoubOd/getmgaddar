@@ -25,7 +25,7 @@ export class LoginComponent {
         this.user.password
       );
 
-      this.router.navigate(['']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.log(error);
     }

@@ -26,7 +26,7 @@ import { Timestamp } from 'firebase/firestore';
   ],
 })
 export class WorkoutPlansComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'date', 'exercices'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'exercices', 'actions'];
   dataSource = new MatTableDataSource<WorkoutPlan>();
   private workoutPlansService = inject(WorkoutPlansService);
 
@@ -38,11 +38,20 @@ export class WorkoutPlansComponent implements OnInit {
       .pipe(
         map((data) => {
           return data.map((val) => {
-            if (val.date) {
-              const da = val.date as unknown as Timestamp;
-              val.date = da.toDate().toString();
+            const id = val.payload.doc.id;
+            console.log(val.payload.doc.id);
+            const da = val.payload.doc.data();
+            if (da.date) {
+              const date = da.date as unknown as Timestamp;
+              da.date = date.toDate().toString();
             }
-            return val;
+            return { ...da, id };
+
+            // if (val.date) {
+            //   const da = val.date as unknown as Timestamp;
+            //   val.date = da.toDate().toString();
+            // }
+            // return val;
           });
         })
       )
@@ -50,11 +59,22 @@ export class WorkoutPlansComponent implements OnInit {
         this.dataSource = new MatTableDataSource<WorkoutPlan>(
           data as WorkoutPlan[]
         );
+        console.log(data);
       });
+    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  async deleteWorkout(workout: WorkoutPlan) {
+    console.log(workout);
+    try {
+      await this.workoutPlansService.delete(workout);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
@@ -66,6 +86,7 @@ export type exercice = {
 };
 
 export interface WorkoutPlan {
+  id: string;
   name: string;
   date: string;
   exercices: exercice[];
